@@ -127,7 +127,7 @@ a {
 
 header {
     margin-bottom: 150px;
-    background: linear-gradient(180deg, rgba(18, 16, 20, 0.97) 0%, #121014 100%), url('../../../../../20240104072155im_/https_/luxurynitro.com/assets/img/mtfuji.png'), no-repeat;
+    background: linear-gradient(180deg, rgba(18, 16, 20, 0.97) 0%, #121014 100%), url('assets/img/mtfuji.png'), no-repeat;
     padding-top: 50px;
     height: 100%;
     z-index: 3;
