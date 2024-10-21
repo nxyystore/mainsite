@@ -10,7 +10,7 @@ const snowflakes = {
       }
     },
     "color": {
-      "value": "#b6a3ce"
+      "value": "#8f91c2"
     },
     "shape": {
       "type": "edge",
