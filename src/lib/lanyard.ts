@@ -1,43 +1,50 @@
 export interface Activity {
+  id: string;
+  name: string;
   type: number;
   state?: string;
-  name: string;
-  id: string;
   details?: string;
-  created_at: number;
-  emoji?: {
-    id: string;
-    name: string;
-    animated?: boolean;
-  };
   assets?: {
     large_image?: string;
     large_text?: string;
     small_image?: string;
     small_text?: string;
   };
+  created_at: number;
+  emoji?: {
+    id: string;
+    name: string;
+    animated?: boolean;
+  };
 }
 
 export interface LanyardData {
   spotify?: {
-    song: string;
-    artist: string;
-    album_art_url: string;
     timestamps: {
       start: number;
       end: number;
     };
+    album: string;
+    album_art_url: string;
+    artist: string;
+    song: string;
   };
   discord_user: {
     id: string;
     username: string;
+    clan: {
+      tag: string;
+      idenitiy_guild_id: string;
+      badge: string;
+      idenitiy_enabled: boolean;
+    }
     avatar: string;
     discriminator: string;
     global_name: string;
     avatar_decoration_data?: {
       sku_id: string;
       asset: string;
-    }
+    };
   };
   discord_status: "online" | "idle" | "dnd" | "offline";
   activities: Activity[];
@@ -80,7 +87,7 @@ export class LanyardWebSocket {
         JSON.stringify({
           op: 2,
           d: { subscribe_to_ids: Array.from(this.subscribers.keys()) },
-        }),
+        })
       );
     };
 
@@ -117,7 +124,7 @@ export class LanyardWebSocket {
     this.subscribers.set(discord_id, callback);
     if (this.ws?.readyState === WebSocket.OPEN) {
       this.ws.send(
-        JSON.stringify({ op: 2, d: { subscribe_to_ids: [discord_id] } }),
+        JSON.stringify({ op: 2, d: { subscribe_to_ids: [discord_id] } })
       );
     }
   }
@@ -128,7 +135,7 @@ export class LanyardWebSocket {
 }
 
 export const getLanyardData = async (
-  discord_id: string,
+  discord_id: string
 ): Promise<LanyardData | null> => {
   try {
     const response = await fetch(`${LANYARD_API_URL}/users/${discord_id}`);
