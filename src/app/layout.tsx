@@ -9,7 +9,7 @@ const kodeMono = Kode_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "fedded",
+  title: "fednet",
   description: "we live for the feds and the feds live for us",
 };
 
