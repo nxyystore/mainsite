@@ -10,13 +10,14 @@ export const members: Member[] = [
       {
         name: "Protecction",
         description: "A free discord oauth verification bot with extra features.",
-        url: "https://protecction-security.online",
+        url: "https://0a2.site",
         type: "website" as const,
       },
       {
         name: "honest",
         description: "A multipurpose bot that provides a wide range of features.",
         url: "https://honest.rocks",
+        icon: "https://api.honest.rocks/avatar",
         type: "website" as const,
       },
     ],
@@ -38,6 +39,20 @@ export const members: Member[] = [
     name: "fien",
     link: "https://t.me/social832",
     discord_id: "837040462011433002",
+  },
+  {
+    name: "cache",
+    link: "https://guns.lol/pb",
+    github: "x2dh",
+    discord_id: "1243274323402293259",
+    projects: [
+      {
+        name: "Cure/Exhale",
+        description: "A free multipurpose bot with various features.",
+        url: "https://dsc.gg/curebot",
+        type: "website" as const,
+      }
+    ]
   }
  
 ].sort((a, b) => {
