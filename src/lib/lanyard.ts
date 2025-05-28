@@ -68,7 +68,7 @@ export type Member = {
 };
 
 const LANYARD_SOCKET_URL = "wss://api.swappi.ng/socket";
-const LANYARD_API_URL = "https://api.swappi.ng/v1";
+const LANYARD_API_URL = "http://api.swappi.ng/v1";
 
 export class LanyardWebSocket {
   private ws: WebSocket | null = null;
