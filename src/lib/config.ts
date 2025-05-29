@@ -53,6 +53,11 @@ export const members: Member[] = [
         type: "website" as const,
       }
     ]
+  },
+  {
+    name: "record",
+    link: "https://t.me/c0ncerned",
+    discord_id: "724757546811916329",
   }
  
 ].sort((a, b) => {

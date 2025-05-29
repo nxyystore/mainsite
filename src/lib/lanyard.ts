@@ -32,14 +32,14 @@ export interface LanyardData {
   discord_user: {
     id: string;
     username: string;
-    clan: {
-      tag: string;
-      idenitiy_guild_id: string;
-      badge: string;
-      idenitiy_enabled: boolean;
+    clan?: {
+      tag?: string;
+      idenitiy_guild_id?: string;
+      badge?: string;
+      idenitiy_enabled?: boolean;
     }
     avatar: string;
-    discriminator: string;
+    discriminator?: string;
     global_name: string;
     avatar_decoration_data?: {
       sku_id: string;
@@ -68,7 +68,7 @@ export type Member = {
 };
 
 const LANYARD_SOCKET_URL = "wss://api.swappi.ng/socket";
-const LANYARD_API_URL = "http://api.swappi.ng/v1";
+const LANYARD_API_URL = "https://api.swappi.ng/v1";
 
 export class LanyardWebSocket {
   private ws: WebSocket | null = null;
