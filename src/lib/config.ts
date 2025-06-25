@@ -20,25 +20,40 @@ export const members: Member[] = [
         icon: "https://api.honest.rocks/avatar",
         type: "website" as const,
       },
+      {
+        name: "Hyper Boosts",
+        description: "A cheap-ish server boosting service.",
+        url: "https://hyperboosts.cc",
+        icon: "https://hyperboosts.cc/_next/image?url=%2Flogo.png&w=48&q=75r",
+        type: "website" as const,
+      },
     ],
   },
   {
     name: "pk",
-    link: "https://eslut.live/pkrhs",
+    link: "https://fakecrime.bio/pkrhs",
     discord_id: "657766336709132328",
     projects: [
       {
-        name: "Syncify",
+        name: "Snowify",
         description: "A freemium member farm service.",
-        url: "https://discord.gg/syncify",
+        url: "https://discord.gg/joinify",
         type: "website" as const,
       },
     ]
   },
-  {
-    name: "fien",
-    link: "https://t.me/social832",
-    discord_id: "837040462011433002",
+    {
+    name: "cam",
+    link: "https://fakecrime.bio/camikaze",
+    discord_id: "1080114266767634533",
+    projects: [
+      {
+        name: "Quack Boosts",
+        description: "A cheap-ish server boosting service.",
+        url: "https://discord.gg/quackboosts",
+        type: "website" as const,
+      },
+    ]
   },
   {
     name: "cache",
@@ -53,15 +68,10 @@ export const members: Member[] = [
         type: "website" as const,
       }
     ]
-  },
-  {
-    name: "record",
-    link: "https://t.me/c0ncerned",
-    discord_id: "724757546811916329",
   }
  
 ].sort((a, b) => {
-  const topOrder = ["nxyy", "pk", "fien"];
+  const topOrder = ["nxyy", "pk", "cam"];
   if (topOrder.includes(a.name) && topOrder.includes(b.name)) return topOrder.indexOf(a.name) - topOrder.indexOf(b.name);
   if (topOrder.includes(a.name)) return -1;
   if (topOrder.includes(b.name)) return 1;

@@ -909,6 +909,9 @@ export default function Home() {
           </DialogContent>
         </Dialog>
       </div>
-    </div>
+    <footer className="fixed bottom-0 left-0 right-0 p-4 bg-white/5 text-white/60 text-sm flex justify-center">
+  &copy; made by https://vxnet.sh
+  </footer>
+  </div>
   );
 }
