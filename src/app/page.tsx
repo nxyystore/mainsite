@@ -17,10 +17,10 @@ import {
   Activity,
 } from "@/lib/lanyard";
 import type { Member, Project } from "@/types/member";
-import dynamic from 'next/dynamic';
-import music from "@/lib/music.json"
+import dynamic from "next/dynamic";
+import music from "@/lib/music.json";
 
-const Player = dynamic(() => import('lottie-react'), { ssr: false });
+const Player = dynamic(() => import("lottie-react"), { ssr: false });
 
 type ExtendedActivity = Activity & {
   application_id?: string;
@@ -32,7 +32,7 @@ type ExtendedMember = Member & {
 };
 
 const extractSpotifyColor = async (
-  url: string,
+  url: string
 ): Promise<[number, number, number] | null> => {
   try {
     const img = document.createElement("img");
@@ -80,7 +80,7 @@ export default function Home() {
             ? await getLanyardData(member.discord_id)
             : null;
           return [member.name, { ...member, discord_data: lanyard }] as const;
-        }),
+        })
       );
 
       const memberDataWithLanyard = Object.fromEntries(results);
@@ -108,7 +108,7 @@ export default function Home() {
           setMemberData((prev) => ({
             ...prev,
             [m.name]: { ...prev[m.name], discord_data: data },
-          })),
+          }))
         );
       }
     });
@@ -141,10 +141,10 @@ export default function Home() {
       const progress = Math.min(
         Math.max(
           (now - spotifyData.timestamps.start) /
-          (spotifyData.timestamps.end - spotifyData.timestamps.start),
-          0,
+            (spotifyData.timestamps.end - spotifyData.timestamps.start),
+          0
         ),
-        1,
+        1
       );
       setSpotifyProgress(progress);
     };
@@ -169,7 +169,7 @@ export default function Home() {
         avatar_url: string;
         bio: string | null;
       } | null;
-    },
+    }
   ) => {
     if (member.discord_data?.discord_user.avatar) {
       return `https://cdn.discordapp.com/avatars/${member.discord_id}/${member.discord_data.discord_user.avatar}.png?size=256`;
@@ -199,14 +199,16 @@ export default function Home() {
     member: ExtendedMember & {
       discord_data?: LanyardData | null;
     },
-    size: "sm" | "lg",
+    size: "sm" | "lg"
   ) => {
     if (!member.discord_data) return null;
     const sizeClasses = size === "sm" ? "w-2.5 h-2.5" : "w-6 h-6";
     const borderClasses = size === "sm" ? "border-[2.5px]" : "border-[3px]";
     return (
       <div
-        className={`absolute -bottom-[2px] -right-[2px] ${sizeClasses} rounded-full ${borderClasses} ${getStatusColor(member.discord_data.discord_status)}`}
+        className={`absolute -bottom-[2px] -right-[2px] ${sizeClasses} rounded-full ${borderClasses} ${getStatusColor(
+          member.discord_data.discord_status
+        )}`}
         style={{ borderColor: "rgb(35, 35, 35)" }}
       />
     );
@@ -229,7 +231,10 @@ export default function Home() {
       return (
         <div className="relative">
           <div className="w-6 h-6 rounded-full overflow-hidden bg-white/10 animate-pulse" />
-          <div className="absolute -bottom-[2px] -right-[2px] w-2.5 h-2.5 rounded-full border-[2.5px] bg-white/10 animate-pulse" style={{ borderColor: "rgb(35, 35, 35)" }} />
+          <div
+            className="absolute -bottom-[2px] -right-[2px] w-2.5 h-2.5 rounded-full border-[2.5px] bg-white/10 animate-pulse"
+            style={{ borderColor: "rgb(35, 35, 35)" }}
+          />
         </div>
       );
     }
@@ -255,7 +260,10 @@ export default function Home() {
         <div className="relative">
           <div className="w-6 h-6 rounded-full overflow-hidden">
             <img
-              src={member.stats?.avatar_url || `https://github.com/${member.github}.png`}
+              src={
+                member.stats?.avatar_url ||
+                `https://github.com/${member.github}.png`
+              }
               alt={member.name}
               width={24}
               height={24}
@@ -280,7 +288,7 @@ export default function Home() {
 
     const prevActivity = () => {
       setCurrentActivityIndex(
-        (prev) => (prev - 1 + activities.length) % activities.length,
+        (prev) => (prev - 1 + activities.length) % activities.length
       );
     };
 
@@ -349,10 +357,15 @@ export default function Home() {
               transition={{ duration: 0.3, ease: "easeOut" }}
               src={
                 activity.assets.large_image.startsWith("mp:external/")
-                  ? `https://${activity.assets.large_image.split("/").slice(3).join("/")}`
+                  ? `https://${activity.assets.large_image
+                      .split("/")
+                      .slice(3)
+                      .join("/")}`
                   : activity.assets.large_image.startsWith("spotify:")
-                    ? `https://i.scdn.co/image/${activity.assets.large_image.split(":")[1]}`
-                    : `https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png`
+                  ? `https://i.scdn.co/image/${
+                      activity.assets.large_image.split(":")[1]
+                    }`
+                  : `https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png`
               }
               alt={activity.name}
               className="w-12 h-12 rounded-md flex-shrink-0 object-cover"
@@ -363,7 +376,9 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
-                src={`https://cdn.discordapp.com/emojis/${activity.emoji.id}.${activity.emoji.animated ? "gif" : "png"}`}
+                src={`https://cdn.discordapp.com/emojis/${activity.emoji.id}.${
+                  activity.emoji.animated ? "gif" : "png"
+                }`}
                 alt={activity.emoji.name}
                 className="w-6 h-6 flex-shrink-0"
               />
@@ -372,7 +387,9 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
-                src={`https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${activity.emoji.name.codePointAt(0)?.toString(16)}.svg`}
+                src={`https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${activity.emoji.name
+                  .codePointAt(0)
+                  ?.toString(16)}.svg`}
                 alt={activity.emoji.name}
                 className="w-6 h-6 flex-shrink-0"
               />
@@ -418,7 +435,11 @@ export default function Home() {
             {activities.map((_, idx) => (
               <div
                 key={idx}
-                className={`w-1 h-1 rounded-full ${idx === currentActivityIndex % activities.length ? "bg-white/60" : "bg-white/20"}`}
+                className={`w-1 h-1 rounded-full ${
+                  idx === currentActivityIndex % activities.length
+                    ? "bg-white/60"
+                    : "bg-white/20"
+                }`}
               />
             ))}
           </div>
@@ -511,9 +532,11 @@ export default function Home() {
                     onClick={() => handleMemberSelect(member)}
                   >
                     <div className="flex items-center justify-center gap-2">
-                      {member.discord_id && (
-                        renderAvatar(memberData[member.name], !memberData[member.name]?.discord_data)
-                      )}
+                      {member.discord_id &&
+                        renderAvatar(
+                          memberData[member.name],
+                          !memberData[member.name]?.discord_data
+                        )}
                       <span className="text-base font-medium whitespace-nowrap">
                         {member.name}
                         {memberData[member.name]?.discord_data?.spotify && (
@@ -523,13 +546,13 @@ export default function Home() {
                             exit={{ opacity: 0, scale: 0.5 }}
                             className="inline-block ml-1.5 text-white/60"
                           >
-                            <svg 
-                              xmlns="http://www.w3.org/2000/svg" 
-                              viewBox="0 0 24 24" 
-                              fill="currentColor" 
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
                               className="w-3.5 h-3.5"
                             >
-                              <path d="M5.566 4.657A4.505 4.505 0 016.75 4.5h10.5c.41 0 .806.055 1.183.157A3 3 0 0015.75 3h-7.5a3 3 0 00-2.684 1.657zM2.25 12a3 3 0 013-3h13.5a3 3 0 013 3v6a3 3 0 01-3 3H5.25a3 3 0 01-3-3v-6zM5.25 7.5c-.41 0-.806.055-1.184.157A3 3 0 016.75 6h10.5a3 3 0 012.684 1.657A4.505 4.505 0 0018.75 7.5H5.25z"/>
+                              <path d="M5.566 4.657A4.505 4.505 0 016.75 4.5h10.5c.41 0 .806.055 1.183.157A3 3 0 0015.75 3h-7.5a3 3 0 00-2.684 1.657zM2.25 12a3 3 0 013-3h13.5a3 3 0 013 3v6a3 3 0 01-3 3H5.25a3 3 0 01-3-3v-6zM5.25 7.5c-.41 0-.806.055-1.184.157A3 3 0 016.75 6h10.5a3 3 0 012.684 1.657A4.505 4.505 0 0018.75 7.5H5.25z" />
                             </svg>
                           </motion.div>
                         )}
@@ -564,21 +587,37 @@ export default function Home() {
                     onClick={() => handleMemberSelect(member)}
                   >
                     <div className="flex items-center gap-2 w-full">
-                      {member.discord_id && (
-                        renderAvatar(memberData[member.name], !memberData[member.name]?.discord_data)
-                      )}
+                      {member.discord_id &&
+                        renderAvatar(
+                          memberData[member.name],
+                          !memberData[member.name]?.discord_data
+                        )}
                       <span className="text-sm flex items-center gap-1.5 flex-1 justify-center">
                         {member.name}
                         <motion.div
-                          initial={{ opacity: 0, scale: 0.5, width: 0, rotate: 0 }}
+                          initial={{
+                            opacity: 0,
+                            scale: 0.5,
+                            width: 0,
+                            rotate: 0,
+                          }}
                           animate={{
-                            opacity: memberData[member.name]?.discord_data?.spotify ? 1 : 0,
-                            scale: memberData[member.name]?.discord_data?.spotify ? 1 : 0.5,
-                            width: memberData[member.name]?.discord_data?.spotify ? "auto" : 0,
+                            opacity: memberData[member.name]?.discord_data
+                              ?.spotify
+                              ? 1
+                              : 0,
+                            scale: memberData[member.name]?.discord_data
+                              ?.spotify
+                              ? 1
+                              : 0.5,
+                            width: memberData[member.name]?.discord_data
+                              ?.spotify
+                              ? "auto"
+                              : 0,
                           }}
                           transition={{
                             duration: 0.3,
-                            ease: "easeInOut"
+                            ease: "easeInOut",
                           }}
                           className="text-white/60 overflow-hidden"
                         >
@@ -696,7 +735,7 @@ export default function Home() {
                       {currentMemberData.discord_data?.activities && (
                         <div className="mt-1">
                           {renderActivities(
-                            currentMemberData.discord_data.activities,
+                            currentMemberData.discord_data.activities
                           )}
                         </div>
                       )}
@@ -855,26 +894,26 @@ export default function Home() {
                             {Array.from(
                               {
                                 length: Math.ceil(
-                                  (currentMemberData?.projects?.length ?? 0) /
-                                  2,
+                                  (currentMemberData?.projects?.length ?? 0) / 2
                                 ),
                               },
                               (_, i) => (
                                 <motion.button
                                   key={i + 1}
                                   onClick={() => setCurrentPage(i + 1)}
-                                  className={`w-2 h-2 p-2 rounded-full relative transition-colors duration-300 ${currentPage === i + 1
-                                    ? "bg-white/60"
-                                    : "bg-white/10 hover:bg-white/20"
-                                    }`}
+                                  className={`w-2 h-2 p-2 rounded-full relative transition-colors duration-300 ${
+                                    currentPage === i + 1
+                                      ? "bg-white/60"
+                                      : "bg-white/10 hover:bg-white/20"
+                                  }`}
                                   whileHover={{ scale: 1.2 }}
                                   whileTap={{ scale: 0.9 }}
                                   animate={
                                     currentPage === i + 1
                                       ? {
-                                        scale: [1, 1.2, 1],
-                                        transition: { duration: 0.5 },
-                                      }
+                                          scale: [1, 1.2, 1],
+                                          transition: { duration: 0.5 },
+                                        }
                                       : { scale: 1 }
                                   }
                                 >
@@ -897,7 +936,7 @@ export default function Home() {
                                     />
                                   </motion.span>
                                 </motion.button>
-                              ),
+                              )
                             )}
                           </motion.div>
                         )}
@@ -909,9 +948,9 @@ export default function Home() {
           </DialogContent>
         </Dialog>
       </div>
-    <footer className="fixed bottom-0 left-0 right-0 p-4 bg-white/5 text-white/60 text-sm flex justify-center">
-  &copy; made by https://vxnet.sh
-  </footer>
-  </div>
+      <footer className="fixed bottom-0 left-0 right-0 p-4 bg-white/5 text-white/60 text-sm flex justify-center">
+        made by https://vxnet.sh
+      </footer>
+    </div>
   );
 }

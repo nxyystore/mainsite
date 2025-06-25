@@ -24,7 +24,7 @@ export const members: Member[] = [
         name: "Hyper Boosts",
         description: "A cheap-ish server boosting service.",
         url: "https://hyperboosts.cc",
-        icon: "https://hyperboosts.cc/_next/image?url=%2Flogo.png&w=48&q=75r",
+        icon: "https://hyperboosts.cc/_next/image?url=%2Flogo.png&w=48&q=75",
         type: "website" as const,
       },
     ],
